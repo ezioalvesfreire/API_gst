@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 
 import {connect} from '../database';
+import { MosfetInterface, mosfetInterface } from '../interface/mosfetInterface';
 
 export async function getMosfets(req: Request, res: Response): Promise<Response> {
     const conn = await connect();
@@ -9,7 +10,7 @@ export async function getMosfets(req: Request, res: Response): Promise<Response>
 };
 
 export async function createMosfet(req: Request, res: Response){
-    const newMosfet = req.body;
+    const newMosfet: MosfetInterface = req.body;
     return res.json({
         message: 'Mosfet Created'
     });
