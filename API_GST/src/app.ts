@@ -3,15 +3,20 @@ import express, { Application } from "express";
 
 export class App{
 
-   private app: Application;
+   private app: Application;    
 
-    constructor() {
+    constructor(private port?: number | string) {
        this.app = express(); 
+       this.settings();     
     }
     
+    settings(){
+        this.app.set('port', this.port || process.env.PORT || 5000)
+    }
+
     async listen(){
-      await this.app.listen(5000);
-      console.log('Server on Port', 5000);
+      await this.app.listen(this.app.get('port'));
+      console.log('Server on Port', this.app.get('port'));
 
     }
 }
