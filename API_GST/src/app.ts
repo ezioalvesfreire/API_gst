@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import morgan from 'morgan';
 
 
 export class App{
@@ -7,11 +8,16 @@ export class App{
 
     constructor(private port?: number | string) {
        this.app = express(); 
-       this.settings();     
+       this.settings();
+       this.middlewares();     
     }
     
     settings(){
         this.app.set('port', this.port || process.env.PORT || 5000)
+    }
+
+    middlewares(){
+        this.app.use(morgan('dev'));
     }
 
     async listen(){
