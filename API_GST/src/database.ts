@@ -1,9 +1,14 @@
 import {createPool} from 'mysql2/promise';
 
-export function connect() {
+export async function connect() {
 
-    createPool({
+  const connection = await  createPool({
 
-        
-    }) 
+        host: 'localhost',
+        user: 'root',
+        database: 'api_gst',
+        connectionLimit:10
+
+    });
+    return connection;
 }
