@@ -2,7 +2,8 @@ import express, { Application } from "express";
 import morgan from 'morgan';
 
 
-import IndexRouters from './routes/index.routes'
+import IndexRouters from './routes/index.routes';
+import MosfetRoutes from './routes/mosfet.routes';
 
 export class App{
 
@@ -21,10 +22,13 @@ export class App{
 
     middlewares(){
         this.app.use(morgan('dev'));
+       
 
     }
     routes() {
         this.app.use(IndexRouters);
+        this.app.use('/mosfets', MosfetRoutes);
+
     }
 
     async listen(){
