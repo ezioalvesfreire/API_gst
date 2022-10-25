@@ -9,3 +9,10 @@ CREATE TABLE transistors(
 );
 
 DESCRIBE transistors;
+
+CREATE TABLE mosfets(
+    vds number,
+    rds number,  
+);
+
+DESCRIBE mosfets;

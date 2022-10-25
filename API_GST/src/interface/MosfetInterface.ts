@@ -1,5 +1,5 @@
-export interface MosfetInterface{
-        id: string;
+export interface MosfetInterface {
+        id: number;
         description: string;
         package: string;
 }
