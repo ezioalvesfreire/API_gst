@@ -5,7 +5,7 @@ const router = Router();
 import {getMosfets, createMosfet} from '../controllers/mosfet.controller'
 
 router.route('/')
-    .get(getMosfets);
+    .get(getMosfets)
     .post(createMosfet);
 
 export default router;
