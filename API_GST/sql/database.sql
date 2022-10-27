@@ -11,8 +11,9 @@ CREATE TABLE transistors(
 DESCRIBE transistors;
 
 CREATE TABLE mosfets(
-    vds number,
-    rds number,  
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    vds INT(4),
+    rds INT(4) 
 );
 
-DESCRIBE mosfets;
+DESCRIBE mosfets; 

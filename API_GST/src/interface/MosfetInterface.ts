@@ -1,5 +1,6 @@
 export interface MosfetInterface {
-        id: number;
-        description: string;
-        package: string;
+        id?: number;
+        vds: number;
+        rds: number;
 }
+ 
