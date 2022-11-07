@@ -14,14 +14,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
+const morgan_1 = __importDefault(require("morgan"));
+const index_routes_1 = __importDefault(require("./routes/index.routes"));
+const mosfet_routes_1 = __importDefault(require("./routes/mosfet.routes"));
 class App {
-    constructor() {
+    constructor(port) {
+        this.port = port;
         this.app = (0, express_1.default)();
+        this.settings();
+        this.middlewares();
+        this.routes();
+    }
+    settings() {
+        this.app.set('port', this.port || process.env.PORT || 5000);
+    }
+    middlewares() {
+        this.app.use((0, morgan_1.default)('dev'));
+    }
+    routes() {
+        this.app.use(index_routes_1.default);
+        this.app.use('/mosfets', mosfet_routes_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.app.listen(5000);
-            console.log('Server on Port', 5000);
+            yield this.app.listen(this.app.get('port'));
+            console.log('Server on Port', this.app.get('port'));
         });
     }
 }
