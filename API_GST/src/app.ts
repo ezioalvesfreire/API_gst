@@ -5,15 +5,27 @@ import morgan from 'morgan';
 import IndexRouters from './routes/index.routes';
 import MosfetRoutes from './routes/mosfet.routes';
 
+
+const cors = require('cors')
+
+
 export class App{
 
    private app: Application;    
 
     constructor(private port?: number | string) {
-       this.app = express(); 
+       this.app = express().use(cors()); 
        this.settings();
        this.middlewares();  
        this.routes();   
+
+       this.app.get('/testando', (req, res) => {
+        return res.json([
+            { description: 'FQP50N06'},
+            { description: 'BUK457'}
+        ])
+    })
+
     }
     
     settings(){
@@ -25,6 +37,7 @@ export class App{
         this.app.use(express.json());
 
     }
+
     routes() {
         this.app.use(IndexRouters);
         this.app.use('/mosfets', MosfetRoutes);
