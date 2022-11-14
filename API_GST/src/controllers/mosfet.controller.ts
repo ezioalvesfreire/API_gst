@@ -5,7 +5,7 @@ import { MosfetInterface} from '../interface/MosfetInterface';
 
 export async function getMosfets(req: Request, res: Response): Promise<Response> {
     const conn = await connect();
-    const mosfets = await conn.query('SELECT * FROM transistors');
+    const mosfets = await conn.query('SELECT * FROM mosfets');
     return  res.json(mosfets[0]);
 };
 
@@ -23,7 +23,7 @@ export async function createMosfet(req: Request, res: Response){
  export async function getMosfet(req: Request, res: Response): Promise<Response>{
    const id =  req.params.mosfetId;
    const conn = await connect();
-   const mosfets = await conn.query('SELECT * FROM mosfets WHERE id = ?', [id]);
+   const mosfets = await conn.query('SELECT * FROM mosfets WHERE id_mosfet = ?', [id]);
     return res.json(mosfets[0]);
  } 
    

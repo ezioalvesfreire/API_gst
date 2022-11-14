@@ -2,18 +2,14 @@ CREATE DATABASE api_gst;
 
 USE api_gst;
 
-CREATE TABLE transistors(
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    description varchar(15) NOT NULL,
-    package varchar(15) NOT NULL
-);
-
-DESCRIBE transistors;
-
 CREATE TABLE mosfets(
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    vds INT(4),
-    rds INT(4) 
+    id_mosfet INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description varchar(15),
+    package varchar(15),
+    ch varchar(6),    
+    drainCurreunt INT(4),
+    voltageDrainSource INT(4),
+    resistanceDraiSource INT(6)
 );
 
 DESCRIBE mosfets; 
