@@ -4,6 +4,7 @@ import morgan from 'morgan';
 
 import IndexRouters from './routes/index.routes';
 import MosfetRoutes from './routes/mosfet.routes';
+import PowerTransistorRoutes from "./routes/powerTransistor.routes";
 
 
 const cors = require('cors')
@@ -16,15 +17,16 @@ export class App{
     constructor(private port?: number | string) {
        this.app = express().use(cors()); 
        this.settings();
-       this.middlewares();  
+       this.middlewares(); 
+
        this.routes();   
 
-       this.app.get('/testando', (req, res) => {
+   /*    this.app.get('/testando', (req, res) => {  //criado rotas e controlles próprios
         return res.json([
             { description: 'FQP50N06'},
             { description: 'BUK457'}
         ])
-    })
+    }) */
 
     }
     
@@ -41,6 +43,7 @@ export class App{
     routes() {
         this.app.use(IndexRouters);
         this.app.use('/mosfets', MosfetRoutes);
+        this.app.use('/powerTransistors', PowerTransistorRoutes);
 
     }
 

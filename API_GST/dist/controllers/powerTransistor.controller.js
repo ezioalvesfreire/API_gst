@@ -9,14 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMosfets = void 0;
+exports.getPowerTransistors = void 0;
 const database_1 = require("../database");
-function getMosfets(req, res) {
+function getPowerTransistors(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const conn = yield (0, database_1.connect)();
-        const mosfets = yield conn.query('SELECT * FROM transistors');
-        return res.json(mosfets[0]);
+        const powerTransistors = yield conn.query('SELECT * FROM powerTransistors');
+        return res.json(powerTransistors[0]);
     });
 }
-exports.getMosfets = getMosfets;
+exports.getPowerTransistors = getPowerTransistors;
 
