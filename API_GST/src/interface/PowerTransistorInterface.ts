@@ -1,7 +1,7 @@
 export interface PowerTransistorInterface {
     id_powerTransistor?:number;
-    description?: Text;
-    package?: Text;
+    descript?: Text;
+    pack?: Text;
     ch?: Text;
     voltageColetorBase?: number;
     voltageCollectorEmitter?: number;

@@ -19,4 +19,3 @@ function getMosfets(req, res) {
     });
 }
 exports.getMosfets = getMosfets;
-

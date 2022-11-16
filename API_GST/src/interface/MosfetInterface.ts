@@ -1,10 +1,9 @@
 export interface MosfetInterface {
         id_mosfet?:number;
-        description: Text;
+        descript: Text;
         ch?: Text;
-        package?: Text;
+        pack?: Text;
         drainCurreunt?: number;
         voltageDrainSource?: number;
         resistanceDraiSource?: number;
-}
-
+} 

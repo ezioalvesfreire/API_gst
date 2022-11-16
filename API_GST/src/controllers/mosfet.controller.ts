@@ -27,3 +27,4 @@ export async function createMosfet(req: Request, res: Response){
     return res.json(mosfets[0]);
  } 
    
+ 
