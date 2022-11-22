@@ -3,9 +3,9 @@ export interface PowerTransistorInterface {
     descript?: Text;
     pack?: Text;
     ch?: Text;
-    voltageColetorBase?: number;
+    voltageColletorBase?: number;
     voltageCollectorEmitter?: number;
-    voltageEmmiterBase?: number;
+    voltageEmitterBase?: number;
     collectorCurrent?: number;
 }
 

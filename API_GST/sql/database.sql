@@ -19,9 +19,9 @@ CREATE TABLE powerTransistors(
     descript varchar(15),
     pack varchar(15),
     ch varchar(15),    
-    voltageColetorBase INT(4),
+    voltageColletorBase INT(4),
     voltageCollectorEmitter INT(4),
-    voltageEmmiterBase INT(6),
+    voltageEmitterBase INT(6),
     collectorCurrent INT(6)
 );
 
