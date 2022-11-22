@@ -7,7 +7,7 @@ CREATE TABLE mosfets(
     descript varchar(15),
     pack varchar(15),
     ch varchar(15),    
-    drainCurreunt INT(4),
+    drainCurrent INT(4),
     voltageDrainSource INT(4),
     resistanceDraiSource INT(6)
 );

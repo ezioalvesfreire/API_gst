@@ -18,8 +18,8 @@ export interface MosfetInterface {
         ch2?: Text;
         pack1?: Text;
         pack2?: Text;
-        drainCurreunt1?: number;
-        drainCurreunt2?: number;
+        drainCurrent1?: number;
+        drainCurrent2?: number;
         voltageDrainSource1?: number;
         voltageDrainSource2?: number;
         resistanceDraiSource1?: number;

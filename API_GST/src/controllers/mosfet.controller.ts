@@ -20,8 +20,8 @@ export async function createMosfet(req: Request, res: Response) {
     const ch2 = newMosfet.ch2
     const pack1 = newMosfet.pack1
     const pack2 = newMosfet.pack2
-    const drainCurreunt1 = newMosfet.drainCurreunt1
-    const drainCurreunt2 = newMosfet.drainCurreunt2
+    const drainCurrent1 = newMosfet.drainCurreunt1
+    const drainCurrent2 = newMosfet.drainCurreunt2
     const voltageDrainSource1 = newMosfet.voltageDrainSource1
     const voltageDrainSource2 = newMosfet.voltageDrainSource2
     const resistanceDraiSource1 = newMosfet.resistanceDraiSource1
