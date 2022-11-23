@@ -20,18 +20,18 @@ export async function createMosfet(req: Request, res: Response) {
     const ch2 = newMosfet.ch2
     const pack1 = newMosfet.pack1
     const pack2 = newMosfet.pack2
-    const drainCurrent1 = newMosfet.drainCurreunt1
-    const drainCurrent2 = newMosfet.drainCurreunt2
+    const drainCurrent1 = newMosfet.drainCurrent1
+    const drainCurrent2 = newMosfet.drainCurrent2
     const voltageDrainSource1 = newMosfet.voltageDrainSource1
     const voltageDrainSource2 = newMosfet.voltageDrainSource2
     const resistanceDraiSource1 = newMosfet.resistanceDraiSource1
     const resistanceDraiSource2 = newMosfet.resistanceDraiSource2
 
 
-    const arrayMosfet1 = { descript: descript1, ch: ch1, pack: pack1, drainCurreunt: drainCurreunt1, voltageDrainSource: voltageDrainSource1, resistanceDraiSource: resistanceDraiSource1 }
+    const arrayMosfet1 = { descript: descript1, ch: ch1, pack: pack1, drainCurreunt: drainCurrent1, voltageDrainSource: voltageDrainSource1, resistanceDraiSource: resistanceDraiSource1 }
     conn.query('INSERT INTO mosfets SET ?', [arrayMosfet1]);
 
-    const arrayMosfet2 = { descript: descript2, ch: ch2, pack: pack2, drainCurreunt: drainCurreunt2, voltageDrainSource: voltageDrainSource2, resistanceDraiSource: resistanceDraiSource2 }
+    const arrayMosfet2 = { descript: descript2, ch: ch2, pack: pack2, drainCurreunt: drainCurrent2, voltageDrainSource: voltageDrainSource2, resistanceDraiSource: resistanceDraiSource2 }
     conn.query('INSERT INTO mosfets SET ?', [arrayMosfet2]); 
     return res.json({
         message: 'Mosfet Created', newMosfet
