@@ -14,6 +14,9 @@ export async function createMosfet(req: Request, res: Response) {
 
     const conn = await connect();
 
+    const messegeMosfet1 = "Erro: O transisfor mosfet do formulário 1 já existe";
+    const messegeMosfet2 = "Erro: O transisfor mosfet do formulário 2 já existe";
+
 
     const descriptionMosfet_1 = newMosfet.descriptionMosfet_1    
     const channelMosfet_1 = newMosfet.channelMosfet_1
@@ -31,19 +34,23 @@ export async function createMosfet(req: Request, res: Response) {
     const resistanceDraiSource_2 = newMosfet.resistanceDraiSource_2
 
 
-    const res1: any = await conn.query('SELECT count(*) qtd FROM mosfets WHERE ?', [{ descriptionMosfet: descriptionMosfet_1}]);
-    if(res1[0][0].qtd == 0) {
+    const consult_1: any = await conn.query('SELECT count(*) qtd FROM mosfets WHERE ?', [{ descriptionMosfet: descriptionMosfet_1}]);
+    if(consult_1[0][0].qtd == 0) {
         const arrayMosfet1 = { descriptionMosfet: descriptionMosfet_1, channelMosfet: channelMosfet_1, packageMosfet: packageMosfet_1, drainCurrent: drainCurrent_1, voltageDrainSource: voltageDrainSource_1, resistanceDraiSource: resistanceDraiSource_1 }
         conn.query('INSERT INTO mosfets SET ?', [arrayMosfet1]);
+
+        const messegeMosfet1 = "Sucesso: O transisfor mosfet do formulário 1 foi cadastrado com sucesso";
     }
 
-    const res2: any = await conn.query('SELECT count(*) qtd FROM mosfets WHERE ?', [{ descriptionMosfet: descriptionMosfet_2}]);
-    if(res2[0][0].qtd) {
+    const consult_2: any = await conn.query('SELECT count(*) qtd FROM mosfets WHERE ?', [{ descriptionMosfet: descriptionMosfet_2}]);
+    if(consult_2[0][0].qtd == 0) {
         const arrayMosfet2 = { descriptionMosfet: descriptionMosfet_2, channelMosfet: channelMosfet_2, packageMosfet: packageMosfet_2, drainCurrent: drainCurrent_2, voltageDrainSource: voltageDrainSource_2, resistanceDraiSource: resistanceDraiSource_2 }
         conn.query('INSERT INTO mosfets SET ?', [arrayMosfet2]);
+
+        const messegeMosfet2 = "Sucesso: O transisfor mosfet do formulário 2 foi cadastrado com sucesso";
     }
     return res.json({
-        message: 'Mosfet Created', newMosfet
+        message1: messegeMosfet1, message2: messegeMosfet2, 
     });
 }
 
