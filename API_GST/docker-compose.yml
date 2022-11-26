@@ -1,4 +1,40 @@
 version: '4'
+
 services:
-    API_GST:
-            
+
+  sql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql-container    
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+    volumes:
+        - ./API_GST/sql/data:/var/lib/mysql
+    restart: always
+
+  app:
+    build: .        
+        container_name: node-container
+        restart: always
+        volumes:
+            - ./API_GST:/home/node/app
+        ports:
+            - "5000:5000"
+        depends_on:
+            - sql
+
+
+
+   app:
+      image: "API_GST"
+      container_name: API_GST_container
+      restart: always
+      volumes:
+        - ./
+      ports:
+        - "8888:80"
+      depends_on:
+        - sql
+        - api
+
+   
