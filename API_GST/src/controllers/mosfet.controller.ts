@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { connect } from '../database';
 import { MosfetInterface } from '../interface/MosfetInterface';
 
+import { checkChannelMosfet, checkResistanceDrainSource } from '../services/mosfet.service';
+
 export async function getMosfets(req: Request, res: Response): Promise<Response> {
     const conn = await connect();
     const mosfets = await conn.query('SELECT * FROM mosfets');
@@ -49,8 +51,13 @@ export async function createMosfet(req: Request, res: Response) {
 
         messegeMosfet2 = "Sucesso: O transisfor mosfet do formulário 2 foi cadastrado com sucesso";
     }
+
+    const check_channel = checkChannelMosfet(newMosfet);
+    
+    const check_resistance_drainSource = checkResistanceDrainSource(newMosfet);
+
     return res.json({
-        message1: messegeMosfet1, message2: messegeMosfet2,
+        message1: messegeMosfet1, message2: messegeMosfet2, checkChannel: check_channel, checkResistanceDrainSource: check_resistance_drainSource
     });
 }
 
