@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { connect } from '../database';
 import { MosfetInterface } from '../interface/MosfetInterface';
 
-import { checkChannelMosfet, checkResistanceDrainSource } from '../services/mosfet.service';
+import { checkChannelMosfet, checkResistanceDrainSource, calculateEletricalPower } from '../services/mosfet.service';
 
 export async function getMosfets(req: Request, res: Response): Promise<Response> {
     const conn = await connect();
@@ -26,6 +26,7 @@ export async function createMosfet(req: Request, res: Response) {
     const drainCurrent_1 = newMosfet.drainCurrent_1
     const voltageDrainSource_1 = newMosfet.voltageDrainSource_1
     const resistanceDraiSource_1 = newMosfet.resistanceDraiSource_1
+    const greatnessResistanceDraiSource_1 = newMosfet.greatnessResistanceDraiSource_1
 
 
     const descriptionMosfet_2 = newMosfet.descriptionMosfet_2
@@ -34,7 +35,7 @@ export async function createMosfet(req: Request, res: Response) {
     const drainCurrent_2 = newMosfet.drainCurrent_2
     const voltageDrainSource_2 = newMosfet.voltageDrainSource_2
     const resistanceDraiSource_2 = newMosfet.resistanceDraiSource_2
-
+ 
 
     const consult_1: any = await conn.query('SELECT count(*) qtd FROM mosfets WHERE ?', [{ descriptionMosfet: descriptionMosfet_1 }]);
     if (consult_1[0][0].qtd == 0) {
@@ -53,11 +54,14 @@ export async function createMosfet(req: Request, res: Response) {
     }
 
     const check_channel = checkChannelMosfet(newMosfet);
-    
+
     const check_resistance_drainSource = checkResistanceDrainSource(newMosfet);
 
+    const calculate_eletrical_power = calculateEletricalPower(drainCurrent_1, drainCurrent_2, voltageDrainSource_1, voltageDrainSource_2 );
+
+
     return res.json({
-        message1: messegeMosfet1, message2: messegeMosfet2, checkChannel: check_channel, checkResistanceDrainSource: check_resistance_drainSource
+        message1: messegeMosfet1, message2: messegeMosfet2, checkChannel: check_channel, checkResistanceDrainSource: check_resistance_drainSource, calculateEletricalPower: calculate_eletrical_power
     });
 }
 

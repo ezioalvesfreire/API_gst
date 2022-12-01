@@ -19,6 +19,8 @@ export interface MosfetInterface {
         drainCurrent_1?: number;       
         voltageDrainSource_1?: number;        
         resistanceDraiSource_1?: number;
+        greatnessResistanceDraiSource_1?: String;
+
         
 
         descriptionMosfet_2: Text;
@@ -27,4 +29,5 @@ export interface MosfetInterface {
         drainCurrent_2?: number;
         voltageDrainSource_2?: number;
         resistanceDraiSource_2?: number;
+        greatnessResistanceDraiSource_2?: String;
 }

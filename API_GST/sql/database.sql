@@ -7,9 +7,11 @@ CREATE TABLE mosfets(
     descriptionMosfet varchar(15),
     packageMosfet varchar(15),
     channelMosfet varchar(15),    
-    drainCurrent INT(4),
-    voltageDrainSource INT(4),
-    resistanceDraiSource INT(6)
+    drainCurrent FLOAT(5,2),
+    voltageDrainSource FLOAT(5,2),
+    resistanceDraiSource FLOAT(5,2),
+    greatnessResistanceDraiSource varchar(6)
+
 );
 
 DESCRIBE mosfets; 
@@ -19,10 +21,10 @@ CREATE TABLE powerTransistors(
     descriptionPowerTransistor varchar(15),
     packagePowerTransistor varchar(15),
     channelPowerTransistor varchar(15),    
-    voltageColletorBase INT(4),
-    voltageCollectorEmitter INT(4),
-    voltageEmitterBase INT(6),
-    collectorCurrent INT(6)
+    voltageColletorBase FLOAT(5,2),
+    voltageCollectorEmitter FLOAT(5,2),
+    voltageEmitterBase FLOAT(5,2),
+    collectorCurrent FLOAT(5,2)
 );
 
 DESCRIBE powerTransistors; 
