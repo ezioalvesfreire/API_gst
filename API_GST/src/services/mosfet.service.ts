@@ -1,22 +1,29 @@
 import e from 'express';
 import { createMosfet } from '../controllers/mosfet.controller';
 
+let checkChannelMosfet_2 = true
+let calculate_eletrical_power = true
+let msg_mosfet_2_compatible = ""
+
 
 export function checkChannelMosfet(newMosfet: any) {
 
-
-  if (newMosfet.channelMosfet_1 != newMosfet.channelMosfet_2) {
-    let msg_mosfet_1_compatible = "Erro 1: O transistor " + newMosfet.channelMosfet_1 + " não é compatível com o transistor " + newMosfet.channelMosfet_2 + "";
-    let msg_mosfet_2_compatible = "Erro 1: O transistor " + newMosfet.channelMosfet_2 + " não é compatível com o transistor " + newMosfet.channelMosfet_1 + "";
-    return {
-
-      checkChannelMosfet_1: false, mosfet_1_compatible: msg_mosfet_1_compatible, checkChannelMosfet_2: false, msgMosfet_2_compatible: msg_mosfet_2_compatible
-    }
+  if (newMosfet.channelMosfet_1 !== newMosfet.channelMosfet_2) {  
+     msg_mosfet_2_compatible = "Erro 1: O transistor " + newMosfet.descriptionMosfet_2 + " não é compatível com o transistor " + newMosfet.descriptionMosfet_1 + ""; 
+     checkChannelMosfet_2 = false
+  } else {
+    msg_mosfet_2_compatible = "Sucesso 1: O transistor " + newMosfet.descriptionMosfet_2 + " é compatível com o transistor " + newMosfet.descriptionMosfet_1 + "";
+    checkChannelMosfet_2 = true
   }
+  return {
+    checkChannelMosfet_2: checkChannelMosfet_2, msgMosfet_2_compatible: msg_mosfet_2_compatible
+   }
+
 }
 
 export function checkResistanceDrainSource(newMosfet: any) {
 
+  let check_resistance_drainSource = true
   let resistanceDraiSource_1 = Number(newMosfet.resistanceDraiSource_1)
   let resistanceDraiSource_2 = Number(newMosfet.resistanceDraiSource_2)
   const greatnessResistanceDraiSource_1 = newMosfet.greatnessResistanceDraiSource_1
@@ -29,16 +36,17 @@ export function checkResistanceDrainSource(newMosfet: any) {
   const varianceResistanceDraiSource = 30
 
   const percentage_1 = resistanceDraiSource_1 / 100 * varianceResistanceDraiSource
-  
 
-  return {percentage_1}
 
   if ((resistanceDraiSource_2 <= (resistanceDraiSource_1 - percentage_1)) ||
     (resistanceDraiSource_2 >= (resistanceDraiSource_1 + percentage_1))
   ) {
-    return {
-      checkResistanceDrainSource: false
-    }
+    check_resistance_drainSource = false
+  } else {
+    check_resistance_drainSource = true
+  }
+  return {
+    checkResistanceDrainSource: check_resistance_drainSource
   }
 
 }
@@ -71,17 +79,17 @@ export function calculateEletricalPower(drCurrent_1: any, drCurrent_2: any, vtDr
 export function checkPowerCompatibility(powerElatricalMosfet_1: number, powerElatricalMosfet_2: number){
 
   const variancePowerElatricalMosfet = 30
-
   const percentage_mosfet_1 = powerElatricalMosfet_1 / 100 * variancePowerElatricalMosfet
  
-
   if(( powerElatricalMosfet_2 <= (powerElatricalMosfet_1 - percentage_mosfet_1 )) ||
        powerElatricalMosfet_2 >= (powerElatricalMosfet_1 + percentage_mosfet_1 )){
-    return {
-      calculateEletricalPower: false
-    }
+        calculate_eletrical_power = false
+  } else {
+    calculate_eletrical_power = true
   }
-
+  return {
+    calculateEletricalPower: calculate_eletrical_power
+  }
   
 }
 

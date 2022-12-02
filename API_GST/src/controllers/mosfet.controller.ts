@@ -53,15 +53,19 @@ export async function createMosfet(req: Request, res: Response) {
         messegeMosfet2 = "Sucesso: O transisfor mosfet do formulário 2 foi cadastrado com sucesso";
     }
 
+
     const check_channel = checkChannelMosfet(newMosfet);
+
 
     const check_resistance_drainSource = checkResistanceDrainSource(newMosfet);
 
-    const calculate_eletrical_power = calculateEletricalPower(drainCurrent_1, drainCurrent_2, voltageDrainSource_1, voltageDrainSource_2 );
 
+    const calculate_eletrical_power = calculateEletricalPower(drainCurrent_1, drainCurrent_2, voltageDrainSource_1, voltageDrainSource_2 );
+    
+    
 
     return res.json({
-        message1: messegeMosfet1, message2: messegeMosfet2, checkChannel: check_channel, checkResistanceDrainSource: check_resistance_drainSource, calculateEletricalPower: calculate_eletrical_power
+        msgMosf1WasInseted: messegeMosfet1, msgMosf2WasInseted: messegeMosfet2, checkChannel: check_channel, check_resistance_drainSource: check_resistance_drainSource, calculate_eletrical_power: calculate_eletrical_power
     });
 }
 
