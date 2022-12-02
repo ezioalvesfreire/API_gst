@@ -1,3 +1,4 @@
+import e from 'express';
 import { createMosfet } from '../controllers/mosfet.controller';
 
 
@@ -16,22 +17,35 @@ export function checkChannelMosfet(newMosfet: any) {
 
 export function checkResistanceDrainSource(newMosfet: any) {
 
-  const resistanceDraiSource_1 = Number(newMosfet.resistanceDraiSource_1)
-  const resistanceDraiSource_2 = Number(newMosfet.resistanceDraiSource_2)
+  let resistanceDraiSource_1 = Number(newMosfet.resistanceDraiSource_1)
+  let resistanceDraiSource_2 = Number(newMosfet.resistanceDraiSource_2)
+  const greatnessResistanceDraiSource_1 = newMosfet.greatnessResistanceDraiSource_1
+  const greatnessResistanceDraiSource_2 = newMosfet.greatnessResistanceDraiSource_2
+
+  resistanceDraiSource_1 = stdScalerResistanceDrainSource(resistanceDraiSource_1, greatnessResistanceDraiSource_1)
+
+  resistanceDraiSource_2 = stdScalerResistanceDrainSource(resistanceDraiSource_2, greatnessResistanceDraiSource_2)
 
   const varianceResistanceDraiSource = 30
 
   const percentage_1 = resistanceDraiSource_1 / 100 * varianceResistanceDraiSource
-  const percentage_2 = resistanceDraiSource_2 / 100 * varianceResistanceDraiSource
+  
 
-  if ((resistanceDraiSource_1 > resistanceDraiSource_2) && (resistanceDraiSource_2 <= (resistanceDraiSource_1 - percentage_1)) ||
-    (resistanceDraiSource_1 < resistanceDraiSource_2) && (resistanceDraiSource_1 <= (resistanceDraiSource_2 - percentage_2))
+  return {percentage_1}
+
+  if ((resistanceDraiSource_2 <= (resistanceDraiSource_1 - percentage_1)) ||
+    (resistanceDraiSource_2 >= (resistanceDraiSource_1 + percentage_1))
   ) {
     return {
       checkResistanceDrainSource: false
     }
   }
 
+}
+
+export function stdScalerResistanceDrainSource(resistanceDraiSource: number, greatnessResistanceDraiSource: any){
+  if(greatnessResistanceDraiSource == "Ohms"){ resistanceDraiSource = resistanceDraiSource * 1000  }
+    return resistanceDraiSource
 }
 
 
@@ -59,8 +73,7 @@ export function checkPowerCompatibility(powerElatricalMosfet_1: number, powerEla
   const variancePowerElatricalMosfet = 30
 
   const percentage_mosfet_1 = powerElatricalMosfet_1 / 100 * variancePowerElatricalMosfet
- // const percentage_mosfet_2 = powerElatricalMosfet_2 / 100 * variancePowerElatricalMosfet
-
+ 
 
   if(( powerElatricalMosfet_2 <= (powerElatricalMosfet_1 - percentage_mosfet_1 )) ||
        powerElatricalMosfet_2 >= (powerElatricalMosfet_1 + percentage_mosfet_1 )){
@@ -72,7 +85,3 @@ export function checkPowerCompatibility(powerElatricalMosfet_1: number, powerEla
   
 }
 
-export function convertResistanceDraiSourceToOhms(){
-
-  
-}
