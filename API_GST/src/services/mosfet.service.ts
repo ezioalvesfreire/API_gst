@@ -6,13 +6,16 @@ let calculate_eletrical_power = true
 let msg_mosfet_2_compatible = ""
 
 
-export function checkChannelMosfet(newMosfet: any) {
-
-  if (newMosfet.channelMosfet_1 !== newMosfet.channelMosfet_2) {  
-     msg_mosfet_2_compatible = "Erro 1: O transistor " + newMosfet.descriptionMosfet_2 + " não é compatível com o transistor " + newMosfet.descriptionMosfet_1 + ""; 
+export function checkChannelMosfet(newMosfet: Object) {
+  const channelMosfet1 = Object.values(newMosfet)[0].channelMosfet;
+  const channelMosfet2 = Object.values(newMosfet)[1].channelMosfet;
+  const descriptionMosfet_1 = Object.values(newMosfet)[0].descriptionMosfet;
+  const descriptionMosfet_2 = Object.values(newMosfet)[1].descriptionMosfet;
+  if (channelMosfet1 !== channelMosfet2) {  
+     msg_mosfet_2_compatible = "Erro 1: O transistor " + descriptionMosfet_2 + " não é compatível com o transistor " + descriptionMosfet_1 + ""; 
      checkChannelMosfet_2 = false
   } else {
-    msg_mosfet_2_compatible = "Sucesso 1: O transistor " + newMosfet.descriptionMosfet_2 + " é compatível com o transistor " + newMosfet.descriptionMosfet_1 + "";
+    msg_mosfet_2_compatible = "Sucesso 1: O transistor " + descriptionMosfet_2 + " é compatível com o transistor " + descriptionMosfet_1 + "";
     checkChannelMosfet_2 = true
   }
   return {
@@ -21,13 +24,13 @@ export function checkChannelMosfet(newMosfet: any) {
 
 }
 
-export function checkResistanceDrainSource(newMosfet: any) {
+export function checkResistanceDrainSource(newMosfet: Object) {
 
   let check_resistance_drainSource = true
-  let resistanceDraiSource_1 = Number(newMosfet.resistanceDraiSource_1)
-  let resistanceDraiSource_2 = Number(newMosfet.resistanceDraiSource_2)
-  const greatnessResistanceDraiSource_1 = newMosfet.greatnessResistanceDraiSource_1
-  const greatnessResistanceDraiSource_2 = newMosfet.greatnessResistanceDraiSource_2
+  let resistanceDraiSource_1 = Number(Object.values(newMosfet)[0].resistanceDraiSource)
+  let resistanceDraiSource_2 = Number(Object.values(newMosfet)[1].resistanceDraiSource)
+  const greatnessResistanceDraiSource_1 = Object.values(newMosfet)[0].greatnessResistanceDraiSource
+  const greatnessResistanceDraiSource_2 = Object.values(newMosfet)[1].greatnessResistanceDraiSource
 
   resistanceDraiSource_1 = stdScalerResistanceDrainSource(resistanceDraiSource_1, greatnessResistanceDraiSource_1)
 
